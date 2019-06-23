@@ -1,5 +1,5 @@
 # termobit
-
+Transform your fridge in a internet of things device.
 
 ## Documentation
 ### Before deploy
@@ -20,7 +20,7 @@ Example:
 * NTP_INTERVAL 1 * 60 * 60 * 1000 // Every 1 hour (in milliseconds)
 * TZ_OFFSET (-3 * 60 * 60) // in seconds.
 
-### Avaliable topics
+### Avaliable MQTT topics
 
 #### station/+/version
 Example: 2019.06.23.1429
