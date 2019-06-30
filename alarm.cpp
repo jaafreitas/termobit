@@ -1,6 +1,8 @@
 #include "alarm.h"
 #include "settings.h"
 
+unsigned long lastAlarmTriggered = 0;
+
 void setupAlarm() {
   pinMode(ALARM_PIN, OUTPUT);
 
@@ -10,7 +12,10 @@ void setupAlarm() {
 
 void alarm(bool value) {
   if (value) {
-    digitalWrite(ALARM_PIN, LOW);
+    lastAlarmTriggered = millis();
+  }
+
+  if (millis() - lastAlarmTriggered < ALARM_MINIMUM_TIME) {
     tone(ALARM_PIN, 440);    
   } else {
     noTone(ALARM_PIN);

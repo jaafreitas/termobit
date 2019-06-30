@@ -41,3 +41,4 @@
 #define SENSOR_DS18B20_NOTIFY_INTERVAL 1000 // Every second.
 
 #define ALARM_PIN D4
+#define ALARM_MINIMUM_TIME 2000
