@@ -89,22 +89,21 @@ String getISOTime() {
   return String(isoTime);
 }
 
-void setNTPTime() {
+bool setNTPTime() {
   time_t NTPTime = getNTPTime();
   if (NTPTime) {
-    NTPTime = NTPTime + TZ_OFFSET;
-    canReadNTPClient = false;
+    NTPTime = NTPTime + TZ_OFFSET;    
     setTime(NTPTime);
     debugMsg("Date/Time set to %s\n", getISOTime().c_str());
     if (uptime.length() == 0) {
       uptime = getISOTime();
     }
   }
+  return NTPTime;
 }
 
 void setupNTPClient() {
   Udp.begin(NTP_LOCALPORT);
-  setNTPTime();
   // We won't use setSyncProvider and set SyncInterval because we
   // want to have full control of it.
   os_timer_disarm(&NTPClientTimer);
@@ -114,7 +113,10 @@ void setupNTPClient() {
 
 void loopNTPClient( CONN_NOTIFY ) {
   if (canReadNTPClient) {
-    setNTPTime();
-    notify("datetime", getISOTime(), false);
+    canReadNTPClient = false;
+    if (setNTPTime()) {
+      notify("datetime", getISOTime(), false);
+      notify("uptime", uptime, true);
+    }
   }
 }

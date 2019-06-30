@@ -24,12 +24,12 @@ void setup() {
 }
 
 void loop() {
+  conn->loop();
+  
   loopNTPClient([](String topic, String payload, bool retained) {
     conn->notify(topic, payload, retained);
   });
 
-  conn->loop();
-  
   loopSensorButton([](String sensor, String value, bool alarm) {
     conn->notify_sensor(sensor, value, alarm);
   });

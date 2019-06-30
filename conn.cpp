@@ -9,7 +9,7 @@ WiFiClient wifiClient;
 
 extern String uptime;
 
-long lastMQTTReconnectAttempt = -10000;
+long lastMQTTReconnectAttempt = -MQTT_CONNECTION_RETRY;
 
 void setupWiFi(const char* hostname) {
   debugMsg("Starting WiFi Setup...\n", hostname);
@@ -50,10 +50,6 @@ void Conn::connect() {
 
           // Once connected, publish announcements...
           notify("version", version, true);
-          if (uptime.length() > 0) {
-            notify("uptime", uptime, true);
-          }
-
         } else {
           debugMsg(" ERROR: %d. Trying again later.\n", this->_PubSubClient->state());
         }
