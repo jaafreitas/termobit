@@ -5,4 +5,4 @@
 
 void setupSensorButton();
 
-void loopSensorButton( CONN_NOTIFY_SENSOR_STRING );
+void loopSensorButton(Conn* conn);

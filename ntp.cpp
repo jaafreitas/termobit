@@ -111,12 +111,12 @@ void setupNTPClient() {
   os_timer_arm(&NTPClientTimer, NTP_INTERVAL, true);
 }
 
-void loopNTPClient( CONN_NOTIFY ) {
+void loopNTPClient(Conn* conn) {
   if (canReadNTPClient) {
     canReadNTPClient = false;
     if (setNTPTime()) {
-      notify("datetime", getISOTime(), false);
-      notify("uptime", uptime, true);
+      conn->notify_topic("datetime", getISOTime(), false);
+      conn->notify_topic("uptime", uptime, true);
     }
   }
 }

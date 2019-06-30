@@ -49,7 +49,7 @@ void Conn::connect() {
           debugMsg(" Ok.\n");
 
           // Once connected, publish announcements...
-          notify("version", version, true);
+          notify_topic("version", version, true);
         } else {
           debugMsg(" ERROR: %d. Trying again later.\n", this->_PubSubClient->state());
         }
@@ -66,7 +66,7 @@ String Conn::fullTopic(String topic) {
   return "station/" + this->_hostname + "/" + topic;
 }
 
-void Conn::notify(String topic, String payload, bool retained) {
+void Conn::notify_topic(String topic, String payload, bool retained) {
   debugMsg("-> %s: %s\n", fullTopic(topic).c_str(), payload.c_str());
   this->_PubSubClient->publish(fullTopic(topic).c_str(), payload.c_str(), retained);
 }
@@ -79,7 +79,7 @@ void Conn::notify_sensor(String sensor, float value, bool alarmIsTriggered) {
 }
 
 void Conn::notify_sensor(String sensor, String value, bool alarmIsTriggered) {
-  notify("sensor/" + sensor, value, false);
+  notify_topic("sensor/" + sensor, value, false);
   alarm(alarmIsTriggered);
-  notify("alarm/" + sensor, alarmIsTriggered ? "on": "off", false);
+  notify_topic("alarm/" + sensor, alarmIsTriggered ? "on": "off", false);
 }
