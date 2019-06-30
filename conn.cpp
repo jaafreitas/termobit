@@ -81,5 +81,5 @@ void Conn::notify_sensor(String sensor, float value, bool alarmIsTriggered) {
 void Conn::notify_sensor(String sensor, String value, bool alarmIsTriggered) {
   notify_topic("sensor/" + sensor, value, false);
   alarm(alarmIsTriggered);
-  notify_topic("alarm/" + sensor, alarmIsTriggered ? "on": "off", false);
+  notify_topic("alarm/" + sensor, alarmIsTriggered ? STATUS_ON: STATUS_OFF, false);
 }
