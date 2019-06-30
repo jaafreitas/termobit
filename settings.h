@@ -19,3 +19,9 @@
 #define NTP_LOCALPORT 2390
 #define NTP_INTERVAL 1 * 60 * 60 * 1000 // Every 1 hour (in milliseconds)
 #define TZ_OFFSET (-3 * 60 * 60) // in seconds.
+
+#define SENSOR_DOOR_PIN D1
+#define SENSOR_DOOR_NOTIFY_INTERVAL 1000 // Every second.
+#define SENSOR_DOOR_ALARM_NOTIFY 15000
+
+#define ALARM_PIN D4

@@ -3,6 +3,7 @@
 #include "debug.h"
 #include "conn.h"
 #include "version.h"
+#include "alarm.h"
 
 WiFiClient wifiClient;
 
@@ -72,4 +73,17 @@ String Conn::fullTopic(String topic) {
 void Conn::notify(String topic, String payload, bool retained) {
   debugMsg("-> %s: %s\n", fullTopic(topic).c_str(), payload.c_str());
   this->_PubSubClient->publish(fullTopic(topic).c_str(), payload.c_str(), retained);
+}
+
+void Conn::notify_sensor(String sensor, float value, bool alarmIsTriggered) {
+  static char payload[5];
+  dtostrf(value, 5, 2, payload);
+
+  notify_sensor(sensor, String(payload), alarmIsTriggered);
+}
+
+void Conn::notify_sensor(String sensor, String value, bool alarmIsTriggered) {
+  notify("sensor/" + sensor, value, false);
+  alarm(alarmIsTriggered);
+  notify("alarm/" + sensor, alarmIsTriggered ? "on": "off", false);
 }

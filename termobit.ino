@@ -4,6 +4,8 @@
 #include "version.h"
 #include "conn.h"
 #include "ntp.h"
+#include "alarm.h"
+#include "sensorButton.h"
 
 Conn* conn;
 String hostname;
@@ -17,6 +19,8 @@ void setup() {
 
   conn = new Conn(hostname);
   setupNTPClient();
+  setupAlarm();
+  setupSensorButton();
 }
 
 void loop() {
@@ -25,4 +29,8 @@ void loop() {
   });
 
   conn->loop();
+  
+  loopSensorButton([](String sensor, String value, bool alarm) {
+    conn->notify_sensor(sensor, value, alarm);
+  });
 }
