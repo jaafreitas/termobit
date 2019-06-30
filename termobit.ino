@@ -6,6 +6,7 @@
 #include "ntp.h"
 #include "alarm.h"
 #include "sensorButton.h"
+#include "sensorDS18B20.h"
 
 Conn* conn;
 String hostname;
@@ -21,6 +22,7 @@ void setup() {
   setupNTPClient();
   setupAlarm();
   setupSensorButton();
+  setupSensorDS18B20();
 }
 
 void loop() {
@@ -28,4 +30,5 @@ void loop() {
   
   loopNTPClient(conn);
   loopSensorButton(conn);
+  loopSensorDS18B20(conn);
 }
