@@ -71,15 +71,28 @@ void Conn::notify_topic(String topic, String payload, bool retained) {
   this->_PubSubClient->publish(fullTopic(topic).c_str(), payload.c_str(), retained);
 }
 
-void Conn::notify_sensor(String sensor, float value, bool alarmIsTriggered) {
-  static char payload[5];
-  dtostrf(value, 5, 2, payload);
+void Conn::notify_alarm(String sensor, bool alarmIsTriggered) {
+  alarm(alarmIsTriggered);
+  notify_topic("alarm/" + sensor, alarmIsTriggered ? STATUS_ON: STATUS_OFF, false);
+}
 
-  notify_sensor(sensor, String(payload), alarmIsTriggered);
+void Conn::notify_sensor(String sensor, String value) {
+  notify_topic("sensor/" + sensor, value, false);
 }
 
 void Conn::notify_sensor(String sensor, String value, bool alarmIsTriggered) {
-  notify_topic("sensor/" + sensor, value, false);
-  alarm(alarmIsTriggered);
-  notify_topic("alarm/" + sensor, alarmIsTriggered ? STATUS_ON: STATUS_OFF, false);
+  notify_sensor(sensor, value);
+  notify_alarm(sensor, alarmIsTriggered);
+}
+
+void Conn::notify_sensor(String sensor, float value) {
+  static char payload[5];
+  dtostrf(value, 5, 2, payload);
+
+  notify_sensor(sensor, String(payload));
+}
+
+void Conn::notify_sensor(String sensor, float value, bool alarmIsTriggered) {
+  notify_sensor(sensor, value);
+  notify_alarm(sensor, alarmIsTriggered);
 }
