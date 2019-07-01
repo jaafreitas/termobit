@@ -22,8 +22,10 @@ void setupWiFi(const char* hostname) {
 
   debugMsg("Connecting %s to SSID %s", hostname, WIFI_SSID);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-  while (WiFi.status() != WL_CONNECTED) {
+  int retries = 0;
+  while ((WiFi.status() != WL_CONNECTED) and (retries < WIFI_CONNECTION_RETRIES)) {
     delay(500);
+    retries++;
     debugMsg(".");
   }
   debugMsg(" Ok.\n");
