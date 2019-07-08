@@ -70,7 +70,9 @@ String Conn::fullTopic(String topic) {
 
 void Conn::notify_topic(String topic, String payload, bool retained) {
   debugMsg("-> %s: %s\n", fullTopic(topic).c_str(), payload.c_str());
+  digitalWrite(STATUS_PIN, LOW);
   this->_PubSubClient->publish(fullTopic(topic).c_str(), payload.c_str(), retained);
+  digitalWrite(STATUS_PIN, HIGH);
 }
 
 void Conn::notify_alarm(String sensor, bool alarmIsTriggered) {

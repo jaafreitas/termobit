@@ -14,6 +14,7 @@ String hostname;
 
 void setup() {
   setupDebug();
+  setupAlarm();
 
   hostname = String(HOSTNAME_PREFIX) + String(ESP.getChipId());
 
@@ -21,7 +22,6 @@ void setup() {
 
   conn = new Conn(hostname);
   setupNTPClient();
-  setupAlarm();
   setupSensorButton();
   setupSensorDS18B20();
   setupSensorSCT013();

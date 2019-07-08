@@ -4,10 +4,11 @@
 unsigned long lastAlarmTriggered = 0;
 
 void setupAlarm() {
-  pinMode(ALARM_PIN, OUTPUT);
+  pinMode(ALARM_BUZZER_PIN, OUTPUT);
+  digitalWrite(ALARM_BUZZER_PIN, LOW);
 
-  // HIGH means OFF to the LED_BUILTIN on ESP-12E.
-  digitalWrite(ALARM_PIN, HIGH);
+  pinMode(STATUS_PIN, OUTPUT);  
+  digitalWrite(STATUS_PIN, LOW);
 }
 
 void alarm(bool value) {
@@ -16,9 +17,8 @@ void alarm(bool value) {
   }
 
   if (millis() - lastAlarmTriggered < ALARM_MINIMUM_TIME) {
-    tone(ALARM_PIN, 440);    
+    digitalWrite(ALARM_BUZZER_PIN, HIGH);
   } else {
-    noTone(ALARM_PIN);
-    digitalWrite(ALARM_PIN, HIGH);
+    digitalWrite(ALARM_BUZZER_PIN, LOW);
   }
 }

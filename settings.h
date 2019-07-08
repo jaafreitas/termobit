@@ -51,8 +51,9 @@ static const unsigned long SENSOR_SCT013_NOTIFY_INTERVAL = 1000; // Every second
 static const float SENSOR_SCT013_TURNRATIO = 1800.0;
 static const float SENSOR_SCT013_RESISTANCE = 62.0;
 
-static const uint8_t ALARM_PIN = D4;
+static const uint8_t ALARM_BUZZER_PIN = D3;
 static const unsigned long ALARM_MINIMUM_TIME = 2000;
+static const uint8_t STATUS_PIN = D4; // LED_BUILTIN
 
 static const char* RELE_NAME = "fridge";
 static const uint8_t RELE_PIN = D5;
