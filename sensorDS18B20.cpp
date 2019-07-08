@@ -48,7 +48,7 @@ void loopSensorDS18B20(Conn* conn) {
     for (uint8_t index = 0; index < thermometerFounds; index++) {
       DeviceAddress thermometer;
       if (sensors.getAddress(thermometer, index)) {
-        float temp = sensors.getTempCByIndex(index);
+        float temp = sensors.getTempCByIndex(index) - SENSOR_TEMPERATURE_OFFSET;
         averageTemp += temp;
         String sensor = SENSOR_DS18B20_NAME + String("/") + String(index);
         conn->notify_sensor(sensor, temp, checkAlarm(temp));

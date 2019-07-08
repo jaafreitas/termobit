@@ -31,6 +31,7 @@ static const char* SENSOR_TEMPERATURE = "temperature";
 static const float SENSOR_TEMPERATURE_ALARM_LOW = 2.0;
 static const float SENSOR_TEMPERATURE_ALARM_HIGH = 6.0;
 static const float SENSOR_TEMPERATURE_VARIATION_PERCENTAGE = 10;
+static const float SENSOR_TEMPERATURE_OFFSET = 0.0;
 
 static const char* SENSOR_DOOR_NAME = "door";
 static const uint8_t SENSOR_DOOR_PIN = D1;
