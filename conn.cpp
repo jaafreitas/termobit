@@ -47,7 +47,7 @@ void Conn::connect() {
       if (millis() - lastMQTTReconnectAttempt > MQTT_CONNECTION_RETRY) {
         lastMQTTReconnectAttempt = millis();
         debugMsg("Attempting MQTT connection to %s...", MQTT_SERVER);
-        if (this->_PubSubClient->connect(this->_hostname.c_str())) {
+        if (this->_PubSubClient->connect(this->_hostname.c_str(), MQTT_USER, MQTT_PASSWORD)) {
           debugMsg(" Ok.\n");
 
           // Once connected, publish announcements...
@@ -65,7 +65,7 @@ void Conn::loop() {
 }
 
 String Conn::fullTopic(String topic) {
-  return "station/" + this->_hostname + "/" + topic;
+  return String(MQTT_TOPIC_PREFIX) + "station/" + this->_hostname + "/" + topic;
 }
 
 void Conn::notify_topic(String topic, String payload, bool retained) {

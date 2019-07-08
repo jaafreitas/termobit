@@ -14,6 +14,9 @@ static const unsigned long MQTT_CONNECTION_RETRY = 60000;
 
 static const char* MQTT_SERVER = "MQTT_SERVER";
 static const uint16_t MQTT_PORT = 1883;
+static const char* MQTT_USER = "";
+static const char* MQTT_PASSWORD = "";
+static const char* MQTT_TOPIC_PREFIX = "";
 
 static const char* NTP_SERVER = "NTP_SERVER";
 static const uint16_t NTP_PORT = 123;
