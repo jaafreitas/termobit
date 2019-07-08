@@ -43,7 +43,7 @@ static const unsigned long SENSOR_BOX_NOTIFY_INTERVAL = 1000; // Every second.
 static const unsigned long SENSOR_BOX_ALARM_NOTIFY_AFTER = 0;
 
 static const char* SENSOR_DS18B20_NAME = "ds18b20";
-static const uint8_t SENSOR_DS18B20_PIN = D3;
+static const uint8_t SENSOR_DS18B20_PIN = D5;
 static const uint8_t SENSOR_DS18B20_PRECISION = 12;
 static const unsigned long SENSOR_DS18B20_NOTIFY_INTERVAL = 1000; // Every second.
 
@@ -59,7 +59,7 @@ static const unsigned long ALARM_MINIMUM_TIME = 2000;
 static const uint8_t STATUS_PIN = D4; // LED_BUILTIN
 
 static const char* RELE_NAME = "fridge";
-static const uint8_t RELE_PIN = D5;
+static const uint8_t RELE_PIN = D6;
 
 static const char* STATUS_ON = "on";
 static const char* STATUS_OFF = "off";
