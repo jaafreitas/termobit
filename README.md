@@ -1,5 +1,5 @@
 # termobit
-Transform your fridge in a internet of things device.
+Transform your fridge into a internet of things device.
 
 ## Documentation
 ### Before deploy
